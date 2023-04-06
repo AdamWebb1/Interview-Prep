@@ -1,22 +1,18 @@
-from math import floor
-import time
 
-n = 1000
+def count_ways_to_climb_stairs(n):
+	if n < 0:
+		return 0
+	elif n < 3:
+		return n
+	else:
+		memo = [0] * (n+1)
+		memo[0] = 1
+		memo[1] = 1
+		memo[2] = 2
+		for i in range(3, n+1):
+			memo[i] = memo[i-1] + memo[i-2] + memo[i-3]
+		return memo[n]
 
-solutions = ""
 
-startTime = time.time()
-maxPossibleThrees = floor(n/3)
-for numThrees in range(0, maxPossibleThrees+1):
-	maxPossibleTwos = floor((n-numThrees*3)/2)
-	for numTwos in range(0, maxPossibleTwos+1):
-		maxPossibleOnes = floor((n-numThrees*3-numTwos*2))
-		for numOnes in range(0, maxPossibleOnes+1):
-			if (numOnes*1+numTwos*2+numThrees*3) == n:
-				solutions += f"3:{numThrees}, 2:{numTwos}, 1:{numOnes},\n"
-				
-print(solutions)				
-solutions = (solutions.count(",")/3)		
-print(f"Found {solutions} solutions")
-print(f"Algorithm finished in {time.time()-startTime} seconds.")
-
+for i in range(10):
+	print(i, count_ways_to_climb_stairs(i))
