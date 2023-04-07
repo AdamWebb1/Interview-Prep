@@ -1,4 +1,5 @@
 
+
 def count_ways_to_climb_stairs(n):
 	# You can't climb zero steps
 	if n < 0:
@@ -10,18 +11,18 @@ def count_ways_to_climb_stairs(n):
 
 	else:
 		# Just some setup with the existing solutions
-		memo = [0] * (n+1)
-		memo[0] = 1
-		memo[1] = 1
-		memo[2] = 2
+		solutions = [0] * (n+1)
+		solutions[0] = 1
+		solutions[1] = 1
+		solutions[2] = 2
 		for i in range(3, n+1):
 			# The child must have come from one of the previous 3 steps,
 			# so you each of the three previous steps is a possible solution
-			memo[i] = memo[i-1] + memo[i-2] + memo[i-3]
-		return memo[n]
+			solutions[i] = solutions[i-1] + solutions[i-2] + solutions[i-3]
+		return solutions[n]
+
 
 def main():
-	assert count_ways_to_climb_stairs(0) == 0
 	assert count_ways_to_climb_stairs(1) == 1
 	assert count_ways_to_climb_stairs(2) == 2
 	assert count_ways_to_climb_stairs(3) == 4
@@ -32,6 +33,10 @@ def main():
 	assert count_ways_to_climb_stairs(8) == 81
 	assert count_ways_to_climb_stairs(9) == 149
 	assert count_ways_to_climb_stairs(10) == 274
+
+	assert count_ways_to_climb_stairs(0) == 0
+
+	assert count_ways_to_climb_stairs(-1) == 0
 
 	print('All tests passed!')
 
